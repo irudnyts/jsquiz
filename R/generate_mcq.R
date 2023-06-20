@@ -27,9 +27,13 @@ generate_mcq <- function(
     }
 
     htmltools::tags$div(
+
         class = "quiz",
-        htmltools::tags$div(class = "question", question),
+
+        htmltools::tags$div(class = "question", htmltools::HTML(question)),
+
         purrr::map2(.x = answers, .y = names(answers), add_answer),
+
         htmltools::tags$button(
             class = "check",
             id = button_id,
@@ -38,6 +42,7 @@ generate_mcq <- function(
             ),
             button_label
         )
+
     )
 
 }
