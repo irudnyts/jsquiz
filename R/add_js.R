@@ -1,3 +1,4 @@
+#' @export
 add_js <- function() {
 
     # copy javascript.html
