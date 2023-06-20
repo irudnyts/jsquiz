@@ -27,8 +27,8 @@ generate_mcq <- function(
     }
 
     htmltools::tags$div(
-        class = "exs",
-        htmltools::tags$div(class = "qst", question),
+        class = "quiz",
+        htmltools::tags$div(class = "question", question),
         purrr::map2(.x = answers, .y = names(answers), add_answer),
         htmltools::tags$button(
             class = "check",
