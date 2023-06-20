@@ -21,7 +21,7 @@ generate_mcq <- function(
                 type = type,
                 name = radio_buttons_id,
                 value = value,
-                answer
+                htmltools::HTML(answer)
             )
         )
     }
