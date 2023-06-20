@@ -1,4 +1,3 @@
-#' @export
 add_css <- function() {
 
     exs_css <- system.file("exs.css", package = "jsquiz")
