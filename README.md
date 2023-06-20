@@ -17,7 +17,7 @@ exercises into regular R Markdown and Quatro documents.
 
 ## Installation
 
-You can install the development version of jsquiz from
+You can install the development version of `{jsquiz}` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -27,4 +27,47 @@ devtools::install_github("irudnyts/jsquiz")
 
 ## Example
 
-TBA
+To use the package, one needs to initialize it first by `initialize()`
+function. This function will add all necessary CSS and JavaScript files.
+This function is supposed to be run from the console **only one time**:
+
+``` r
+initialize()
+```
+
+Then, quizzes can be added by using function `generate_mcq()` in a
+separate code chunks. This function will generate HTML tags for
+multiple-choice questions:
+
+```` markdown
+```{r, results='asis', message=FALSE, echo=FALSE}
+library(jsquiz)
+jsquiz::generate_mcq()
+```
+````
+
+If you want to generate multiple-choice question and allow for multiple
+options, you can set `allow_multiple_answers = TRUE`. In the following
+example, we set all argument values to non-default values:
+
+```` markdown
+```{r, results='asis', message=FALSE, echo=FALSE}
+jsquiz::generate_mcq(
+    question = "Select programming langauges:",
+    answers = c(
+        "Python" = TRUE,
+        "C++" = TRUE,
+        "RStudio" = FALSE
+    ),
+    button_label = "Submit",
+    allow_multiple_answers = TRUE
+)
+```
+````
+
+Please do not forget to load `{jsquiz}` somewhere and mind the following
+values of chunk’s options:
+
+- `results='asis'`
+- `message=FALSE`
+- `echo=FALSE`
