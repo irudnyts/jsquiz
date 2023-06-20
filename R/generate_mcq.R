@@ -30,7 +30,7 @@ generate_mcq <- function(
             onclick = paste0(
                 "checkAnswer('", button_id, "', '", radio_buttons_id, "');"
             ),
-            diabled = "disabled",
+            disabled = "disabled",
             button_label
         )
     }
