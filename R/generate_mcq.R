@@ -14,6 +14,27 @@ generate_mcq <- function(
 
     type <- ifelse(allow_multiple_answers, "checkbox", "radio")
 
+    button <- if (allow_multiple_answers) {
+        htmltools::tags$button(
+            class = "check",
+            id = button_id,
+            onclick = paste0(
+                "checkAnswer('", button_id, "', '", radio_buttons_id, "');"
+            ),
+            button_label
+        )
+    } else {
+        htmltools::tags$button(
+            class = "check",
+            id = button_id,
+            onclick = paste0(
+                "checkAnswer('", button_id, "', '", radio_buttons_id, "');"
+            ),
+            diabled = "disabled",
+            button_label
+        )
+    }
+
     add_answer <- function(value, answer) {
         value <- ifelse(value, "true", "false")
         htmltools::tags$label(
@@ -27,22 +48,10 @@ generate_mcq <- function(
     }
 
     htmltools::tags$div(
-
         class = "quiz",
-
         htmltools::tags$div(class = "question", htmltools::HTML(question)),
-
         purrr::map2(.x = answers, .y = names(answers), add_answer),
-
-        htmltools::tags$button(
-            class = "check",
-            id = button_id,
-            onclick = paste0(
-                "checkAnswer('", button_id, "', '", radio_buttons_id, "');"
-            ),
-            button_label
-        )
-
+        button
     )
 
 }
