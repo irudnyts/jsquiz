@@ -23,5 +23,5 @@ add_js <- function() {
 
     }
 
-    yaml::write_yaml(output_yaml, output_yaml)
+    yaml::write_yaml(config, output_yaml)
 }

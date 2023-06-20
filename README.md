@@ -13,6 +13,8 @@ exercises in `{bookdown}` books. Currently, works only with `{bookdown}`
 projects, but with a slight modification, one can include those
 exercises into regular R Markdown and Quatro documents.
 
+**Note:** Please treat this package just as a proof of concept!
+
 ## Installation
 
 You can install the development version of jsquiz from
