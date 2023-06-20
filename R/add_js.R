@@ -14,7 +14,7 @@ add_js <- function() {
     output_yaml <- "_output.yml"
     config <- yaml::read_yaml(output_yaml)
 
-    config$`bookdown::gitbook`$includes$in_header <- appned(
+    config$`bookdown::gitbook`$includes$in_header <- append(
         config$`bookdown::gitbook`$includes$in_header,
         "javascript.html"
     )
