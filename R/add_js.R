@@ -1,22 +1,14 @@
 add_js <- function() {
 
-    # copy javascript.html
-    system.file("javascript.html", package = "jsquiz") %>%
-        file.copy(getwd())
+    copy_file("javascript.html")
 
-    # copy quiz.js
-    system.file("quiz.js", package = "jsquiz") %>%
-        file.copy(getwd())
+    copy_file("quiz.js")
 
-    # copy checkOrder.js
-    system.file("checkOrder.js", package = "jsquiz") %>%
-        file.copy(getwd())
+    copy_file("checkOrder.js")
 
-    # copy dragndrop.js
-    system.file("dragndrop.js", package = "jsquiz") %>%
-        file.copy(getwd())
+    copy_file("dragndrop.js")
 
-    # modify _output.yml
+    # add javascript.html to header
     output_yaml <- "_output.yml"
     config <- yaml::read_yaml(output_yaml)
 
@@ -26,7 +18,14 @@ add_js <- function() {
             config$`bookdown::gitbook`$includes$in_header,
             "javascript.html"
         )
+        ui_done("Adding {ui_value('javascript.html')} to {ui_fild('header')}")
     }
 
     yaml::write_yaml(config, output_yaml)
+}
+
+copy_file <- function(file) {
+    system.file(file, package = "jsquiz") %>%
+        file.copy(getwd())
+    ui_done("Copying {ui_value(file)}")
 }

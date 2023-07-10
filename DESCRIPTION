@@ -15,5 +15,6 @@ Imports:
     magrittr,
     purrr,
     stringr,
+    usethis,
     uuid,
     yaml
