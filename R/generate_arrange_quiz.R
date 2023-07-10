@@ -7,21 +7,21 @@ generate_arrange_quiz <- function(
             "Green" = 2
         ),
         button_label = "Check",
-        answer_pool_id = uuid::UUIDgenerate(),
-        elements_pool_id = uuid::UUIDgenerate(),
-        elements_ids = uuid::UUIDgenerate(n = length(elements)),
-        elements_name = uuid::UUIDgenerate(),
-        button_id = uuid::UUIDgenerate()
+        answer_pool_id = UUIDgenerate(),
+        elements_pool_id = UUIDgenerate(),
+        elements_ids = UUIDgenerate(n = length(elements)),
+        elements_name = UUIDgenerate(),
+        button_id = UUIDgenerate()
 ) {
 
     add_element <- function(id, content) {
-        htmltools::tags$div(
+        tags$div(
             class = "element",
             name = elements_name,
             id = id,
             draggable = "true",
             ondragstart = "drag(event)",
-            htmltools::HTML(content)
+            HTML(content)
         )
     }
 
@@ -34,24 +34,24 @@ generate_arrange_quiz <- function(
     }
 
     # HTML
-    html <- htmltools::tags$div(
+    html <- tags$div(
         class = "quiz",
-        htmltools::tags$div(class = "question", htmltools::HTML(question)),
-        htmltools::tags$div(
+        tags$div(class = "question", HTML(question)),
+        tags$div(
             class = "answer_pool",
             id = answer_pool_id,
             ondrop="drop(event)",
             ondragover="allowDrop(event)"
         ),
-        htmltools::tags$div(
+        tags$div(
             class = "elements_pool",
             id = elements_pool_id,
             purrr::map2(elements_ids, names(elements), add_element)
         ),
-        htmltools::tags$button(
+        tags$button(
             class = "check",
             id = button_id,
-            onclick = htmltools::HTML(paste0(
+            onclick = HTML(paste0(
                 "checkArrange('", button_id, "', '", answer_pool_id, "', ",
                 wrap_elements_id(elements_ids), ");"
             )),
@@ -61,17 +61,14 @@ generate_arrange_quiz <- function(
     )
 
     # JavaScript
-
-    enableArrange_js <- system.file("enableArrange.js", package = "jsquiz")
-    enableArrange <- paste(readLines(enableArrange_js), collapse = "\n")
-
-    enableArrange <- stringr::str_replace(enableArrange, "elements_name", elements_name)
-    enableArrange <- stringr::str_replace(enableArrange, "button_id", button_id)
-    enableArrange <- stringr::str_replace(enableArrange, "elements_pool_id", elements_pool_id)
-
-    js <- htmltools::tags$script(
-        htmltools::HTML(enableArrange)
-    )
+    js <- system.file("enableArrange.js", package = "jsquiz") %>%
+        readLines() %>%
+        paste(collapse = "\n") %>%
+        str_replace("elements_name", elements_name) %>%
+        str_replace("button_id", button_id) %>%
+        str_replace("elements_pool_id", elements_pool_id) %>%
+        HTML() %>%
+        tags$script()
 
     htmltools::tagList(html, js)
 
