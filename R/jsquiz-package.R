@@ -9,6 +9,5 @@
 #' @importFrom usethis ui_field
 #' @importFrom usethis ui_oops
 #' @importFrom usethis ui_value
-#' @importFrom uuid UUIDgenerate
 ## usethis namespace: end
 NULL

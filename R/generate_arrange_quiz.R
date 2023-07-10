@@ -7,14 +7,20 @@ generate_arrange_quiz <- function(
             "Green" = 2
         ),
         button_label = NULL,
-        answer_pool_id = UUIDgenerate(),
-        elements_pool_id = UUIDgenerate(),
-        elements_ids = UUIDgenerate(n = length(elements)),
-        elements_name = UUIDgenerate(),
-        button_id = UUIDgenerate(),
         success_messages = NULL,
-        failure_messages = NULL
+        failure_messages = NULL,
+        answer_pool_id = NULL,
+        elements_pool_id = NULL,
+        elements_ids = NULL,
+        elements_name = NULL,
+        button_id = NULL
 ) {
+
+    answer_pool_id <- set_default_id(answer_pool_id)
+    elements_pool_id <- set_default_id(elements_pool_id)
+    elements_ids <- set_default_ids(elements_ids, n = length(elements))
+    elements_name <- set_default_id(elements_name)
+    button_id <- set_default_id(button_id)
 
     if (is.null(button_label))
         button_label <- jsquiz_global$button_label
@@ -33,14 +39,6 @@ generate_arrange_quiz <- function(
             draggable = "true",
             ondragstart = "drag(event)",
             HTML(content)
-        )
-    }
-
-    wrap_elements_id <- function(elements_ids) {
-        paste0(
-            '[',
-            paste0('"', elements_ids[order(elements)], '"', collapse = ', '),
-            ']'
         )
     }
 
@@ -65,7 +63,7 @@ generate_arrange_quiz <- function(
             onclick = HTML(paste0(
                 'checkArrange("', button_id, '", "',
                 answer_pool_id, '", ',
-                wrap_elements_id(elements_ids), ', ',
+                vector_to_array(elements_ids[order(elements)]), ', ',
                 vector_to_array(success_messages), ', ',
                 vector_to_array(failure_messages), ');'
             )),

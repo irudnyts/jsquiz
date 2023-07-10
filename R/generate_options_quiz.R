@@ -7,12 +7,16 @@ generate_options_quiz <- function(
         "Dortmund" = FALSE
     ),
     button_label = NULL,
-    allow_multiple_answers = FALSE,
-    button_id = UUIDgenerate(),
-    radio_buttons_id = UUIDgenerate(),
     success_messages = NULL,
-    failure_messages = NULL
+    failure_messages = NULL,
+    allow_multiple_answers = FALSE,
+    button_id = NULL,
+    radio_buttons_id = NULL
+
 ) {
+
+    button_id <- set_default_id(button_id)
+    radio_buttons_id <- set_default_id(radio_buttons_id)
 
     if (is.null(button_label))
         button_label <- jsquiz_global$button_label
