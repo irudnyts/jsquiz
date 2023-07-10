@@ -10,6 +10,6 @@ set_default_id <- function(id) {
 
 set_default_ids <- function(ids, n) {
     if (is.null(ids))
-        ids <- uuid::UUIDgenerate(n = length(elements))
+        ids <- uuid::UUIDgenerate(n = n)
     ids
 }
