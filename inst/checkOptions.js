@@ -1,4 +1,4 @@
-function checkOptions(button_name, radio_name) {
+function checkOptions(button_name, radio_name, success_messages, failure_messages) {
 
   const radioButtons = document.getElementsByName(radio_name);
   let hasTrueValue = true;
@@ -17,7 +17,7 @@ function checkOptions(button_name, radio_name) {
 
   }
 
-  var success_messages = [
+  /* var success_messages = [
       "Way to go 🌟",
       "You are amazing 🤩",
       "Cool 😎"
@@ -27,7 +27,7 @@ function checkOptions(button_name, radio_name) {
       "Oops, almost 😬",
       "It's slightly different 🙊",
       "Never give up 🚀"
-  ];
+  ]; */
 
   const button = document.getElementById(button_name);
   const message = document.createElement('div');

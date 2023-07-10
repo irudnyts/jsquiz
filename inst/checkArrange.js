@@ -6,22 +6,22 @@ function checkArraysOrder(arr1, arr2) {
   return true;
 }
 
-function checkArrange(button_name, containerID, orderedIDs) {
+function checkArrange(button_name, containerID, orderedIDs, success_messages, failure_messages) {
 
   const container = document.getElementById(containerID);
   const currentOrder = Array.from(container.children).map(box => box.id);
 
-var success_messages = [
+  /* var success_messages = [
       "Way to go 🌟",
       "You are amazing 🤩",
       "Cool 😎"
-  ];
+    ];
 
   var failure_messages = [
       "Oops, almost 😬",
       "It's slightly different 🙊",
       "Never give up 🚀"
-  ];
+  ]; */
 
   const button = document.getElementById(button_name);
   const message = document.createElement('div');

@@ -6,11 +6,22 @@ generate_options_quiz <- function(
         "Frankfurt" = FALSE,
         "Dortmund" = FALSE
     ),
-    button_label = "Check",
+    button_label = NULL,
     allow_multiple_answers = FALSE,
     button_id = UUIDgenerate(),
-    radio_buttons_id = UUIDgenerate()
+    radio_buttons_id = UUIDgenerate(),
+    success_messages = NULL,
+    failure_messages = NULL
 ) {
+
+    if (is.null(button_label))
+        button_label <- jsquiz_global$button_label
+
+    if (is.null(success_messages))
+        success_messages <- jsquiz_global$success_messages
+
+    if (is.null(failure_messages))
+        failure_messages <- jsquiz_global$failure_messages
 
     type <- ifelse(allow_multiple_answers, "checkbox", "radio")
 
@@ -27,9 +38,12 @@ generate_options_quiz <- function(
         tags$button(
             class = "check",
             id = button_id,
-            onclick = paste0(
-                "checkOptions('", button_id, "', '", radio_buttons_id, "');"
-            ),
+            onclick = HTML(paste0(
+                'checkOptions("', button_id, '", "',
+                radio_buttons_id, '", ',
+                vector_to_array(success_messages), ', ',
+                vector_to_array(failure_messages), ');'
+            )),
             disabled = "disabled",
             button_label
         )

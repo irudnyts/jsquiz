@@ -6,13 +6,24 @@ generate_arrange_quiz <- function(
             "Red" = 1,
             "Green" = 2
         ),
-        button_label = "Check",
+        button_label = NULL,
         answer_pool_id = UUIDgenerate(),
         elements_pool_id = UUIDgenerate(),
         elements_ids = UUIDgenerate(n = length(elements)),
         elements_name = UUIDgenerate(),
-        button_id = UUIDgenerate()
+        button_id = UUIDgenerate(),
+        success_messages = NULL,
+        failure_messages = NULL
 ) {
+
+    if (is.null(button_label))
+        button_label <- jsquiz_global$button_label
+
+    if (is.null(success_messages))
+        success_messages <- jsquiz_global$success_messages
+
+    if (is.null(failure_messages))
+        failure_messages <- jsquiz_global$failure_messages
 
     add_element <- function(id, content) {
         tags$div(
@@ -27,9 +38,9 @@ generate_arrange_quiz <- function(
 
     wrap_elements_id <- function(elements_ids) {
         paste0(
-            "[" ,
-            paste0("'", elements_ids[order(elements)], "'", collapse = ", "),
-            "]"
+            '[',
+            paste0('"', elements_ids[order(elements)], '"', collapse = ', '),
+            ']'
         )
     }
 
@@ -52,8 +63,11 @@ generate_arrange_quiz <- function(
             class = "check",
             id = button_id,
             onclick = HTML(paste0(
-                "checkArrange('", button_id, "', '", answer_pool_id, "', ",
-                wrap_elements_id(elements_ids), ");"
+                'checkArrange("', button_id, '", "',
+                answer_pool_id, '", ',
+                wrap_elements_id(elements_ids), ', ',
+                vector_to_array(success_messages), ', ',
+                vector_to_array(failure_messages), ');'
             )),
             disabled = "disabled",
             button_label
