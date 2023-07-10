@@ -18,14 +18,20 @@ add_js <- function() {
             config$`bookdown::gitbook`$includes$in_header,
             "javascript.html"
         )
-        ui_done("Adding {ui_value('javascript.html')} to {ui_fild('header')}")
+        ui_done("Adding {ui_value('javascript.html')} to {ui_field('header')}")
     }
 
     yaml::write_yaml(config, output_yaml)
 }
 
 copy_file <- function(file) {
-    system.file(file, package = "jsquiz") %>%
-        file.copy(getwd())
-    ui_done("Copying {ui_value(file)}")
+
+    if (file.exists(file)) {
+        ui_oops("Ignoring copying file {ui_value(file)} -- already exists")
+    } else {
+        system.file(file, package = "jsquiz") %>%
+            file.copy(getwd())
+        ui_done("Copying {ui_value(file)}")
+    }
+
 }
