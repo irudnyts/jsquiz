@@ -8,19 +8,14 @@ generate_arrange_quiz <- function(
         ),
         button_label = NULL,
         success_messages = NULL,
-        failure_messages = NULL,
-        answer_pool_id = NULL,
-        elements_pool_id = NULL,
-        elements_ids = NULL,
-        elements_name = NULL,
-        button_id = NULL
+        failure_messages = NULL
 ) {
 
-    answer_pool_id <- set_default_id(answer_pool_id)
-    elements_pool_id <- set_default_id(elements_pool_id)
-    elements_ids <- set_default_ids(elements_ids, n = length(elements))
-    elements_name <- set_default_id(elements_name)
-    button_id <- set_default_id(button_id)
+    answer_pool_id <- uuid::UUIDgenerate()
+    elements_pool_id <- uuid::UUIDgenerate()
+    elements_ids <- uuid::UUIDgenerate(n = length(elements))
+    elements_name <- uuid::UUIDgenerate()
+    button_id <- uuid::UUIDgenerate()
 
     if (is.null(button_label))
         button_label <- jsquiz_global$button_label

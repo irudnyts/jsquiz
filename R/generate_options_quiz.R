@@ -6,17 +6,14 @@ generate_options_quiz <- function(
         "Frankfurt" = FALSE,
         "Dortmund" = FALSE
     ),
+    allow_multiple_answers = FALSE,
     button_label = NULL,
     success_messages = NULL,
-    failure_messages = NULL,
-    allow_multiple_answers = FALSE,
-    button_id = NULL,
-    radio_buttons_id = NULL
-
+    failure_messages = NULL
 ) {
 
-    button_id <- set_default_id(button_id)
-    radio_buttons_id <- set_default_id(radio_buttons_id)
+    button_id <- uuid::UUIDgenerate()
+    radio_buttons_id <- uuid::UUIDgenerate()
 
     if (is.null(button_label))
         button_label <- jsquiz_global$button_label
@@ -33,9 +30,12 @@ generate_options_quiz <- function(
         tags$button(
             class = "check",
             id = button_id,
-            onclick = paste0(
-                "checkOptions('", button_id, "', '", radio_buttons_id, "');"
-            ),
+            onclick = HTML(paste0(
+                'checkOptions("', button_id, '", "',
+                radio_buttons_id, '", ',
+                vector_to_array(success_messages), ', ',
+                vector_to_array(failure_messages), ');'
+            )),
             button_label
         )
     } else {
