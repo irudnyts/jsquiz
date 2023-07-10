@@ -1,6 +1,6 @@
 add_css <- function() {
 
-    quizzes_style <- system.file("exs.css", package = "jsquiz") %>%
+    quizzes_style <- system.file("quizzes.css", package = "jsquiz") %>%
         readLines()
 
     if (file.exists("style.css")) {
