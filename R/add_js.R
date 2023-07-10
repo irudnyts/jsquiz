@@ -2,13 +2,19 @@ add_js <- function() {
 
     # copy javascript.html
     javascript_html <- system.file("javascript.html", package = "jsquiz")
-
     file.copy(javascript_html, getwd())
 
     # copy quiz.js
     quiz_js <- system.file("quiz.js", package = "jsquiz")
-
     file.copy(quiz_js, getwd())
+
+    # copy checkOrder.js
+    checkOrder <- system.file("checkOrder.js", package = "jsquiz")
+    file.copy(checkOrder, getwd())
+
+    # copy dragndrop.js
+    dragndrop <- system.file("dragndrop.js", package = "jsquiz")
+    file.copy(dragndrop, getwd())
 
     # modify _output.yml
     output_yaml <- "_output.yml"
