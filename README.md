@@ -21,28 +21,28 @@ You can install the development version of `{jsquiz}` from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("irudnyts/jsquiz")
 ```
 
 ## Example
 
-To use the package, one needs to initialize it first by `initialize()`
+To use the package, one needs to initialize it first by `init()`
 function. This function will add all necessary CSS and JavaScript files.
 This function is supposed to be run from the console **only one time**:
 
 ``` r
-initialize()
+init()
 ```
 
-Then, quizzes can be added by using function `generate_mcq()` in a
-separate code chunks. This function will generate HTML tags for
-multiple-choice questions:
+## Multiple choice question (options quiz): `generate_options_quiz()`
+
+Then, MCQ quizzes can be added by using function
+`generate_options_quiz()` in a separate code chunks. This function will
+generate HTML tags for multiple-choice questions:
 
 ```` markdown
 ```{r, results='asis', message=FALSE, echo=FALSE}
-library(jsquiz)
-jsquiz::generate_mcq()
+jsquiz::generate_options_quiz()
 ```
 ````
 
@@ -52,7 +52,7 @@ example, we set all argument values to non-default values:
 
 ```` markdown
 ```{r, results='asis', message=FALSE, echo=FALSE}
-jsquiz::generate_mcq(
+jsquiz::generate_options_quiz(
     question = "Select programming langauges:",
     answers = c(
         "Python" = TRUE,
@@ -65,9 +65,40 @@ jsquiz::generate_mcq(
 ```
 ````
 
-Please do not forget to load `{jsquiz}` somewhere and mind the following
-values of chunk’s options:
+It is recommended to load `{jsquiz}` somewhere (and to stop using
+namespace prefix `jsquiz::`). Further, please mind the following values
+of chunk’s options:
 
 - `results='asis'`
 - `message=FALSE`
 - `echo=FALSE`
+
+## Arrange quiz: `generate_arrange_quiz()`
+
+```` markdown
+```{r, results='asis', message=FALSE, echo=FALSE}
+jsquiz::generate_arrange_quiz()
+```
+````
+
+## Setting custom success/failure messages and submit button label
+
+One can set global (for the entire `{bookdown}` document) custom
+success/failure messages and submit button label. Please use
+`set_success_messages()`, `set_failure_messages()`, and
+`set_button_label()` for this purpose somewhere in at the begining of
+your book:
+
+``` r
+jsquiz::set_button_label("Submit")
+
+jsquiz::set_success_messages(c("Good job!", "Bravo!"))
+
+jsquiz::set_failure_messages(c("Oops!", "Try again!"))
+```
+
+This feature can be used, if your book in other than English language.
+
+Further, it is also possible to set success/failure messages and submit
+button label individually for each question. It cover very specific
+cases and generaly makes very little sense.
