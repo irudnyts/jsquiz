@@ -2,11 +2,11 @@ add_js <- function() {
 
     copy_file("javascript.html")
 
-    copy_file("quiz.js")
+    copy_file("checkOptions.js")
 
-    copy_file("checkOrder.js")
+    copy_file("checkArrange.js")
 
-    copy_file("dragndrop.js")
+    copy_file("dragDrop.js")
 
     # add javascript.html to header
     output_yaml <- "_output.yml"

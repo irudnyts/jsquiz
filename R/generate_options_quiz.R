@@ -1,5 +1,5 @@
 #' @export
-generate_mcq <- function(
+generate_options_quiz <- function(
     question = "What is the capital of Germany?",
     answers = c(
         "Berlin" = TRUE,
@@ -19,7 +19,7 @@ generate_mcq <- function(
             class = "check",
             id = button_id,
             onclick = paste0(
-                "checkAnswer('", button_id, "', '", radio_buttons_id, "');"
+                "checkOptions('", button_id, "', '", radio_buttons_id, "');"
             ),
             button_label
         )
@@ -28,7 +28,7 @@ generate_mcq <- function(
             class = "check",
             id = button_id,
             onclick = paste0(
-                "checkAnswer('", button_id, "', '", radio_buttons_id, "');"
+                "checkOptions('", button_id, "', '", radio_buttons_id, "');"
             ),
             disabled = "disabled",
             button_label
@@ -59,7 +59,7 @@ generate_mcq <- function(
     js <- if (allow_multiple_answers) {
         NULL
     } else {
-        enable_js <- system.file("enable.js", package = "jsquiz")
+        enable_js <- system.file("enableOptions.js", package = "jsquiz")
         enable <- paste(readLines(enable_js), collapse = "\n")
 
         enable <- stringr::str_replace(enable, "options_ids", radio_buttons_id)

@@ -1,4 +1,4 @@
-function checkAnswer(button_name, radio_name) {
+function checkOptions(button_name, radio_name) {
 
   const radioButtons = document.getElementsByName(radio_name);
   let hasTrueValue = true;

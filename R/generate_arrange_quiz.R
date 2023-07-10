@@ -1,5 +1,5 @@
 #' @export
-generate_arrange <- function(
+generate_arrange_quiz <- function(
         question = "Arrange colors in RGB order:",
         elements = c(
             "Blue" = 3,
@@ -52,7 +52,7 @@ generate_arrange <- function(
             class = "check",
             id = button_id,
             onclick = htmltools::HTML(paste0(
-                "checkOrder('", button_id, "', '", answer_pool_id, "', ",
+                "checkArrange('", button_id, "', '", answer_pool_id, "', ",
                 wrap_elements_id(elements_ids), ");"
             )),
             disabled = "disabled",
