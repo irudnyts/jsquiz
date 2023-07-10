@@ -7,7 +7,7 @@ generate_mcq <- function(
         "Dortmund" = FALSE
     ),
     button_label = "Check",
-    allow_multiple_answers = TRUE,
+    allow_multiple_answers = FALSE,
     button_id = uuid::UUIDgenerate(),
     radio_buttons_id = uuid::UUIDgenerate()
 ) {
@@ -47,11 +47,29 @@ generate_mcq <- function(
         )
     }
 
-    htmltools::tags$div(
+    # HTML
+    html <- htmltools::tags$div(
         class = "quiz",
         htmltools::tags$div(class = "question", htmltools::HTML(question)),
         purrr::map2(.x = answers, .y = names(answers), add_answer),
         button
     )
+
+    # JavaScript
+    js <- if (allow_multiple_answers) {
+        NULL
+    } else {
+        enable_js <- system.file("enable.js", package = "jsquiz")
+        enable <- paste(readLines(enable_js), collapse = "\n")
+
+        enable <- stringr::str_replace(enable, "options_ids", radio_buttons_id)
+        enable <- stringr::str_replace(enable, "button_id", button_id)
+
+        htmltools::tags$script(
+            htmltools::HTML(enable)
+        )
+    }
+
+    htmltools::tagList(html, js)
 
 }
