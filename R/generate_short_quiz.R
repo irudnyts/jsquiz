@@ -1,8 +1,8 @@
 #' @export
 generate_short_quiz <- function(
         question = "What is the capital of France?",
-        answer = "Paris",
-        placeholder = "Type here...",
+        correct_answer = "Paris",
+        placeholder = NULL,
         button_label = NULL,
         success_messages = NULL,
         failure_messages = NULL
@@ -19,6 +19,9 @@ generate_short_quiz <- function(
 
     if (is.null(failure_messages))
         failure_messages <- jsquiz_global$failure_messages
+
+    if (is.null(placeholder))
+        placeholder <- jsquiz_global$placeholder
 
     # HTML
     html <- tags$div(

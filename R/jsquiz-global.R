@@ -13,3 +13,5 @@ jsquiz_global$failure_messages <- c(
 )
 
 jsquiz_global$button_label <- "Check"
+
+jsquiz_global$placeholder <- "Type here..."
