@@ -104,4 +104,31 @@
     border-radius: 8px;
 }
 
+/* Bucket quiz */
+
+.quiz .buckets {
+    display: flex;
+}
+
+.quiz .buckets .column {
+    flex: 1;
+    text-align: center;
+    margin-right: 0.5em;
+}
+
+.quiz .buckets .column:last-child {
+    margin-right: 0;
+}
+
+.quiz .buckets .column span {
+  font-weight: bold;
+}
+
+.quiz .buckets .column .bucket {
+    min-height: 7em;
+    border-radius: 10px;
+    background: #d7effd;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
 /*----------------------------------------------------------------------------*/

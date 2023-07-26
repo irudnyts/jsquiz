@@ -12,12 +12,14 @@ function drop(event) {
     var draggedElement = document.getElementById(data);
     var targetElement = event.target;
 
-    if (targetElement.className === "answer_pool") {
+    if (targetElement.className === "answer_pool" ||
+        targetElement.className === "bucket") {
 
         targetElement.appendChild(draggedElement);
 
     } else if (targetElement.className === "element" &&
-               targetElement.parentNode.className === "answer_pool") {
+               (targetElement.parentNode.className === "answer_pool" ||
+               targetElement.parentNode.className === "bucket")) {
 
         var container = targetElement.parentNode;
         var items = Array.from(container.getElementsByClassName("element"));
@@ -31,7 +33,8 @@ function drop(event) {
         }
     } else if (targetElement.tagName === "CODE" &&
                targetElement.parentNode.className === "element" &&
-               targetElement.parentNode.parentNode.className === "answer_pool") {
+               (targetElement.parentNode.parentNode.className === "answer_pool" ||
+                targetElement.parentNode.parentNode.className === "bucket")) {
 
         var container = targetElement.parentNode.parentNode;
         var items = Array.from(container.getElementsByClassName("element"));
