@@ -8,6 +8,8 @@ add_js <- function() {
 
     copy_file("checkShort.js")
 
+    copy_file("checkBucket.js")
+
     copy_file("dragDrop.js")
 
     # add javascript.html to header

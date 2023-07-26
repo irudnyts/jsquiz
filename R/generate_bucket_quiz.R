@@ -2,16 +2,16 @@
 generate_bucket_quiz <- function(
         question = "Drag cities into the correct buckets:",
         elements = c(
-            "Berlin" = 2,
-            "Paris" = 1,
-            "Lyon" = 1,
-            "Frankfurt" = 2,
-            "Stuttgat" = 2,
-            "Bonn" = 1,
-            "Florence" = 3,
-            "Milan" = 3,
-            "Marcelle" = 2,
-            "Grenoble" = 2
+            "Berlin" = "Germany",
+            "Paris" = "France",
+            "Lyon" = "France",
+            "Frankfurt" = "Germany",
+            "Stuttgat" = "Germany",
+            "Bonn" = "Germany",
+            "Florence" = "Italy",
+            "Milan" = "Italy",
+            "Marcelle" = "France",
+            "Grenoble" = "France"
         ),
         buckets = c("France", "Germany", "Italy"),
         button_label = NULL,
@@ -56,14 +56,16 @@ generate_bucket_quiz <- function(
         ),
         tags$div(
             class = "buckets",
-            purrr::map(
+            purrr::map2(
                 buckets,
-                function(x) {
+                buckets_ids,
+                function(x, y) {
                     htmltools::tags$div(
                         class = "column",
                         htmltools::tags$span(x),
                         htmltools::tags$div(
                             class = "bucket",
+                            id = y,
                             ondrop="drop(event)",
                             ondragover="allowDrop(event)"
                         )
@@ -75,13 +77,13 @@ generate_bucket_quiz <- function(
         tags$button(
             class = "check",
             id = button_id,
-            # onclick = HTML(paste0(
-            #     'checkArrange("', button_id, '", "',
-            #     answer_pool_id, '", ',
-            #     vector_to_array(elements_ids[order(elements)]), ', ',
-            #     vector_to_array(success_messages), ', ',
-            #     vector_to_array(failure_messages), ');'
-            # )),
+            onclick = HTML(paste0(
+                'checkBucket("', button_id, '", ',
+                vector_to_array(buckets_ids), ', ',
+                complex_array(buckets, elements, elements_ids), ', ',
+                vector_to_array(success_messages), ', ',
+                vector_to_array(failure_messages), ');'
+            )),
             disabled = "disabled",
             button_label
         )
@@ -98,5 +100,19 @@ generate_bucket_quiz <- function(
         tags$script()
 
     htmltools::tagList(html, js)
+
+}
+
+complex_array <- function(buckets, elements, elements_ids) {
+    names(elements) <- elements_ids
+    inner_arrays <- c()
+    for (bucket in buckets) {
+        inner_arrays <- append(
+            inner_arrays,
+            vector_to_array(names(elements)[elements == bucket])
+        )
+    }
+
+    vector_to_array(inner_arrays, "")
 
 }
