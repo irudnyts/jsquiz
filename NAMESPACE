@@ -3,6 +3,7 @@
 export("%>%")
 export(generate_arrange_quiz)
 export(generate_options_quiz)
+export(generate_short_quiz)
 export(get_button_label)
 export(get_failure_messages)
 export(get_success_messages)
