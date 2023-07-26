@@ -36,7 +36,14 @@ generate_short_quiz <- function(
             class = "check",
             id = button_id,
             disabled = "disabled",
-            button_label
+            button_label,
+            onclick = HTML(paste0(
+                'checkShort("', button_id, '", "',
+                input_id, '", "',
+                correct_answer, '", ',
+                vector_to_array(success_messages), ', ',
+                vector_to_array(failure_messages), ');'
+            )),
         )
     )
 
