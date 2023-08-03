@@ -34,6 +34,12 @@ function checkArrange(button_name, containerID, orderedIDs, success_messages, fa
   } else {
     message.textContent = failure_messages[Math.floor(Math.random() * failure_messages.length)];
     message.className = 'failure';
+
+    // Move elements in the right order
+    for (const elementID of orderedIDs) {
+        container.appendChild(document.getElementById(elementID));
+    }
+
   }
 
   button.parentNode.replaceChild(message, button);
