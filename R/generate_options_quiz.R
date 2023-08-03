@@ -7,6 +7,7 @@ generate_options_quiz <- function(
         "Dortmund" = FALSE
     ),
     allow_multiple_answers = FALSE,
+    between = NULL,
     button_label = NULL,
     success_messages = NULL,
     failure_messages = NULL
@@ -69,6 +70,7 @@ generate_options_quiz <- function(
     html <- tags$div(
         class = "quiz",
         tags$div(class = "question", HTML(question)),
+        if (!is.null(between)) HTML(between),
         purrr::map2(.x = answers, .y = names(answers), add_answer),
         button
     )
