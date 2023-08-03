@@ -11,18 +11,6 @@ function checkArrange(button_name, containerID, orderedIDs, success_messages, fa
   const container = document.getElementById(containerID);
   const currentOrder = Array.from(container.children).map(box => box.id);
 
-  /* var success_messages = [
-      "Way to go 🌟",
-      "You are amazing 🤩",
-      "Cool 😎"
-    ];
-
-  var failure_messages = [
-      "Oops, almost 😬",
-      "It's slightly different 🙊",
-      "Never give up 🚀"
-  ]; */
-
   const button = document.getElementById(button_name);
   const message = document.createElement('div');
 

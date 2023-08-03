@@ -17,18 +17,6 @@ function checkOptions(button_name, radio_name, success_messages, failure_message
 
   }
 
-  /* var success_messages = [
-      "Way to go 🌟",
-      "You are amazing 🤩",
-      "Cool 😎"
-  ];
-
-  var failure_messages = [
-      "Oops, almost 😬",
-      "It's slightly different 🙊",
-      "Never give up 🚀"
-  ]; */
-
   const button = document.getElementById(button_name);
   const message = document.createElement('div');
 
