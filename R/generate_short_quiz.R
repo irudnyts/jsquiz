@@ -2,6 +2,7 @@
 generate_short_quiz <- function(
         question = "What is the capital of France?",
         correct_answer = "Paris",
+        between = NULL,
         placeholder = NULL,
         button_label = NULL,
         success_messages = NULL,
@@ -27,6 +28,7 @@ generate_short_quiz <- function(
     html <- tags$div(
         class = "quiz",
         tags$div(class = "question", HTML(question)),
+        if (!is.null(between)) HTML(between),
         tags$input(
             id = input_id,
             type = "text",

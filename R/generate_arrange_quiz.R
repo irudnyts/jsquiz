@@ -6,6 +6,7 @@ generate_arrange_quiz <- function(
             "Red" = 1,
             "Green" = 2
         ),
+        between = NULL,
         button_label = NULL,
         success_messages = NULL,
         failure_messages = NULL
@@ -41,6 +42,7 @@ generate_arrange_quiz <- function(
     html <- tags$div(
         class = "quiz",
         tags$div(class = "question", HTML(question)),
+        if (!is.null(between)) HTML(between),
         tags$div(
             class = "answer_pool",
             id = answer_pool_id,

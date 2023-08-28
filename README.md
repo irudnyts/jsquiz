@@ -6,12 +6,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-`{jsquiz}` generates quizzes in a form of multiple-choice questions. The
-business logic is implemented using JavaScript, therefore, no back-end
-required (e.g., Shiny). This package was developed to allow for
-exercises in `{bookdown}` books. Currently, works only with `{bookdown}`
-projects, but with a slight modification, one can include those
-exercises into regular R Markdown and Quatro documents.
+`{jsquiz}` generates such quizzes as MCQ, re-arrange quizzes, bucket
+quizzes, and short-answer quizzes. The business logic is implemented
+using JavaScript, therefore, no back-end required (e.g., Shiny). This
+package was developed to allow for exercises in `{bookdown}` books.
+Currently, works only with `{bookdown}` projects, but with a slight
+modification, one can include those exercises into regular R Markdown
+and Quatro documents.
 
 **Note:** Please treat this package just as a proof of concept!
 
@@ -24,8 +25,6 @@ You can install the development version of `{jsquiz}` from
 devtools::install_github("irudnyts/jsquiz")
 ```
 
-## Example
-
 To use the package, one needs to initialize it first by `init()`
 function. This function will add all necessary CSS and JavaScript files.
 This function is supposed to be run from the console **only one time**:
@@ -34,17 +33,34 @@ This function is supposed to be run from the console **only one time**:
 init()
 ```
 
-## Multiple choice question (options quiz): `generate_options_quiz()`
+Once everything is up and running, one can start developing quizzes.
+Currently four types of quizzes are implemented. They can be generated
+using the following functions:
 
-Then, MCQ quizzes can be added by using function
-`generate_options_quiz()` in a separate code chunks. This function will
-generate HTML tags for multiple-choice questions:
+- `generate_options_quiz()`: a standard MCQ quiz with one or multiple
+  correct options
+- `generate_arrange_quiz()`: a quiz, where the respondent needs to drag
+  items in a particular order
+- `generate_arrange_quiz()`: a quiz, where the respondent needs to drag
+  elements into the correct buckets (bins)
+- `generate_short_quiz()`: a short-answer quiz that assumes an answer in
+  a textual form
+
+These functions should be called from a code chunk with the following
+options: `results='asis'`, `message=FALSE`, and `echo=FALSE`. In other
+words, the code chunk should look like that:
 
 ```` markdown
 ```{r, results='asis', message=FALSE, echo=FALSE}
 jsquiz::generate_options_quiz()
 ```
 ````
+
+### Multiple choice question (options quiz): `generate_options_quiz()`
+
+Then, MCQ quizzes can be added by using function
+`generate_options_quiz()` in a separate code chunks. This function will
+generate HTML tags for multiple-choice questions:
 
 If you want to generate multiple-choice question and allow for multiple
 options, you can set `allow_multiple_answers = TRUE`. In the following
@@ -73,7 +89,7 @@ of chunk’s options:
 - `message=FALSE`
 - `echo=FALSE`
 
-## Arrange quiz: `generate_arrange_quiz()`
+### Arrange quiz: `generate_arrange_quiz()`
 
 ```` markdown
 ```{r, results='asis', message=FALSE, echo=FALSE}
@@ -102,3 +118,5 @@ This feature can be used, if your book in other than English language.
 Further, it is also possible to set success/failure messages and submit
 button label individually for each question. It cover very specific
 cases and generaly makes very little sense.
+
+## Setting custom messages

@@ -14,6 +14,7 @@ generate_bucket_quiz <- function(
             "Grenoble" = "France"
         ),
         buckets = c("France", "Germany", "Italy"),
+        between = NULL,
         button_label = NULL,
         success_messages = NULL,
         failure_messages = NULL
@@ -49,6 +50,7 @@ generate_bucket_quiz <- function(
     html <- tags$div(
         class = "quiz",
         tags$div(class = "question", HTML(question)),
+        if (!is.null(between)) HTML(between),
         tags$div(
             class = "elements_pool",
             id = elements_pool_id,
